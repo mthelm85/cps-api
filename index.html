@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>WHD Presentation</title>
+
+		<link rel="stylesheet" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="reveal.js/dist/theme/moon.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="reveal.js/plugin/highlight/zenburn.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- SLIDE 1 -->
+				<section>
+					<h2><u>Census Microdata API</u></h2>
+					<h4>Basic Monthly CPS</h4>
+					<span style="vertical-align:middle">(</span>
+					<em style="vertical-align:middle">with</em>
+					<img style="vertical-align:middle"src="https://raw.githubusercontent.com/mthelm85/dol-api-with-julia/main/julia-logo-color.svg" alt="Julia" width="125">
+					<span style="vertical-align:middle">)</span>
+					<div style="font-size: 16pt">Matt Helm - WHD Division of Data Analytics</div>
+				</section>
+				<!-- SLIDE 2 -->
+				<section>
+					<section data-auto-animate>
+						<h3>Outline</h3>
+						<ul>
+							<li>CPS Overview</li>
+							<li>Accessing CPS Microdata (via the API)</li>
+							<li>Computing Estimates</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>Outline</h3>
+						<ul>
+							<li style="color:rgb(100, 187, 57)">CPS Overview</li>
+							<li>Accessing CPS Microdata (via the API)</li>
+							<li>Computing Estimates</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>Outline</h3>
+						<ul>
+							<li>CPS Overview</li>
+							<li style="color:rgb(100, 187, 57)">Accessing CPS Microdata (via the API)</li>
+							<li>Computing Estimates</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>Outline</h3>
+						<ul>
+							<li>CPS Overview</li>
+							<li>Accessing CPS Microdata (via the API)</li>
+							<li style="color:rgb(100, 187, 57)">Computing Estimates</li>
+						</ul>
+					</section>
+				</section>
+				<!-- SLIDE 3 -->
+				<section>
+					<h3>Reference Materials</h3>
+					<ul>
+						<li><a target="_blank" href="https://www.census.gov/data/developers/data-sets/census-microdata-api/cps/basic.html">CPS Basic Monthly API Site</a></li>
+						<li><a target="_blank" href="https://www.census.gov/data/datasets/time-series/demo/cps/cps-basic.html">Data Dictionaries & Files</a></li>
+						<li><a target="_blank" href="https://www2.census.gov/programs-surveys/cps/methodology/PublicUseDocumentation_final.pdf">Documentation for Public Use Microdata Files</a></li>
+					</ul>
+				</section>
+				<!-- SLIDE 4 -->
+				<section>
+					<section data-auto-animate>
+						<h3>CPS Overview</h3>
+						<p>From <em>census.gov</em>:</p>
+						<ul>
+							<li>The Current Population Survey is sponsored jointly by the U.S. Census Bureau and the U.S. Bureau of Labor Statistics (BLS)</li>
+							<li>It is the primary source of labor force statistics for the population of the United States</li>
+							<li>Utilizes a probability selected sample of about 60,000 occupied households</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>CPS Overview</h3>
+						<p>From <em>census.gov</em>:</p>
+						<ul>
+							<li style="color:rgb(100, 187, 57)">The Current Population Survey is sponsored jointly by the U.S. Census Bureau and the U.S. Bureau of Labor Statistics (BLS)</li>
+							<li>It is the primary source of labor force statistics for the population of the United States</li>
+							<li>Utilizes a probability selected sample of about 60,000 occupied households</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>CPS Overview</h3>
+						<p>From <em>census.gov</em>:</p>
+						<ul>
+							<li>The Current Population Survey is sponsored jointly by the U.S. Census Bureau and the U.S. Bureau of Labor Statistics (BLS)</li>
+							<li style="color:rgb(100, 187, 57)">It is the primary source of labor force statistics for the population of the United States</li>
+							<li>Utilizes a probability selected sample of about 60,000 occupied households</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>CPS Overview</h3>
+						<p>From <em>census.gov</em>:</p>
+						<ul>
+							<li>The Current Population Survey is sponsored jointly by the U.S. Census Bureau and the U.S. Bureau of Labor Statistics (BLS)</li>
+							<li>It is the primary source of labor force statistics for the population of the United States</li>
+							<li style="color:rgb(100, 187, 57)">Utilizes a probability selected sample of about 60,000 occupied households</li>
+						</ul>
+					</section>
+				</section>
+				<!-- SLIDE 5 -->
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Using The API</h3>
+						<ul style="font-size: smaller;">
+							<li>HTTP <span>GET</span> request</li>
+							<li>Base URL: <span>https://api.census.gov/data/[year]/cps/basic/[month]</span></li>
+							<li>Parameters:</li>
+							<table>
+								<tr>
+								  <th>KEY</th>
+								  <th>VALUE</th>
+								</tr>
+								<tr>
+								  <td>get</td>
+								  <td>PEMLR,PWCMPWGT,PTERNHLY</td>
+								</tr>
+								<tr>
+								  <td>key</td>
+								  <td>f0c0e4dc0941d16473e9ce88d69</td>
+								</tr>
+								<tr data-id="third-row">
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Using The API</h3>
+						<ul style="font-size: smaller;">
+							<li>HTTP <span style="color:rgb(100, 187, 57)">GET</span> request</li>
+							<li>Base URL: <span>https://api.census.gov/data/[year]/cps/basic/[month]</span></li>
+							<li>Parameters:</li>
+							<table>
+								<tr>
+								  <th>KEY</th>
+								  <th>VALUE</th>
+								</tr>
+								<tr>
+								  <td>get</td>
+								  <td>PEMLR,PWCMPWGT,PTERNHLY</td>
+								</tr>
+								<tr>
+								  <td>key</td>
+								  <td>f0c0e4dc0941d16473e9ce88d69</td>
+								</tr>
+								<tr data-id="third-row">
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Using The API</h3>
+						<ul style="font-size: smaller;">
+							<li>HTTP <span>GET</span> request</li>
+							<li>Base URL: <span style="color:rgb(100, 187, 57)">https://api.census.gov/data/[year]/cps/basic/[month]</span></li>
+							<li>Parameters:</li>
+							<table>
+								<tr>
+								  <th>KEY</th>
+								  <th>VALUE</th>
+								</tr>
+								<tr>
+								  <td>get</td>
+								  <td>PEMLR,PWCMPWGT,PTERNHLY</td>
+								</tr>
+								<tr>
+								  <td>key</td>
+								  <td>f0c0e4dc0941d16473e9ce88d69</td>
+								</tr>
+								<tr data-id="third-row">
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Using The API</h3>
+						<ul style="font-size: smaller;">
+							<li>HTTP <span>GET</span> request</li>
+							<li>Base URL: <span>https://api.census.gov/data/[year]/cps/basic/[month]</span></li>
+							<li>Parameters:</li>
+							<table>
+								<tr>
+								  <th>KEY</th>
+								  <th>VALUE</th>
+								</tr>
+								<tr>
+								  <td style="color:rgb(100, 187, 57)">get</td>
+								  <td style="color:rgb(100, 187, 57)">PEMLR,PWCMPWGT,PTERNHLY</td>
+								</tr>
+								<tr>
+								  <td style="color:rgb(100, 187, 57)">key</td>
+								  <td style="color:rgb(100, 187, 57)">f0c0e4dc0941d16473e9ce88d69</td>
+								</tr>
+								<tr data-id="third-row">
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Using The API</h3>
+						<ul style="font-size: smaller;">
+							<li>HTTP <span>GET</span> request</li>
+							<li>Base URL: <span>https://api.census.gov/data/[year]/cps/basic/[month]</span></li>
+							<li>Parameters:</li>
+							<table>
+								<tr>
+								  <th>KEY</th>
+								  <th>VALUE</th>
+								</tr>
+								<tr>
+									<td style="color:rgb(100, 187, 57)">get</td>
+									<td style="color:rgb(100, 187, 57)">PEMLR,PWCMPWGT,PTERNHLY</td>
+								  </tr>
+								  <tr>
+									<td style="color:rgb(100, 187, 57)">key</td>
+									<td style="color:rgb(100, 187, 57)">f0c0e4dc0941d16473e9ce88d69</td>
+								  </tr>
+								<tr data-id="third-row" style="color:rgb(100, 187, 57)">
+									<td>PEERNHRY</td>
+									<td>1</td>
+								</tr>
+							</table>
+						</ul>
+					</section>
+				</section>
+				<!-- SLIDE 6 -->
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<div style="font-size: 15pt;">
+							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+							<pre>
+								<code data-trim data-line-numbers class="language-julia">
+									[["PWCMPWGT","PEMLR"],
+									["1927.2176","1"],
+									["4091.1605","1"],
+									["3871.5343","1"],
+									["4394.7075","1"],
+									["4612.7695","1"],
+									["4100.0707","1"],
+									...
+									["458.5755","1"],
+									["434.6154","2"],
+									["717.1432","4"],
+									["1985.7364","1"],
+									["2512.0695","1"],
+									["6458.2450","1"],
+									["5232.0439","1"],
+									["4396.5636","1"]]
+								</code>
+							</pre>
+							<table>
+								<tr>
+									<th>Labor Force</th>
+									<th>Unemployed</th>
+								</tr>
+								<tr>
+									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
+									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
+								</tr>
+								<tr>
+									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
+									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
+								</tr>
+								<tr>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+								</tr>
+							</table>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<div style="font-size: 15pt;">
+							<span data-id ="url" style="color:rgb(100, 187, 57)">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+							<pre data-id ="res">
+								<code data-trim data-line-numbers class="language-julia">
+									[["PWCMPWGT","PEMLR"],
+									["1927.2176","1"],
+									["4091.1605","1"],
+									["3871.5343","1"],
+									["4394.7075","1"],
+									["4612.7695","1"],
+									["4100.0707","1"],
+									...
+									["458.5755","1"],
+									["434.6154","2"],
+									["717.1432","4"],
+									["1985.7364","1"],
+									["2512.0695","1"],
+									["6458.2450","1"],
+									["5232.0439","1"],
+									["4396.5636","1"]]
+								</code>
+							</pre>
+							<table>
+								<tr>
+									<th>Labor Force</th>
+									<th>Unemployed</th>
+								</tr>
+								<tr>
+									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
+									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
+								</tr>
+								<tr>
+									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
+									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
+								</tr>
+								<tr>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+								</tr>
+							</table>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<div style="font-size: 15pt;">
+							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+							<pre data-id ="res">
+								<code data-trim data-line-numbers="1 | 2-16" class="language-julia">
+									[["PWCMPWGT","PEMLR"],
+									["1927.2176","1"],
+									["4091.1605","1"],
+									["3871.5343","1"],
+									["4394.7075","1"],
+									["4612.7695","1"],
+									["4100.0707","1"],
+									...
+									["458.5755","1"],
+									["434.6154","2"],
+									["717.1432","4"],
+									["1985.7364","1"],
+									["2512.0695","1"],
+									["6458.2450","1"],
+									["5232.0439","1"],
+									["4396.5636","1"]]
+								</code>
+							</pre>
+							<table data-id="tbl">
+								<tr>
+									<th>Labor Force</th>
+									<th>Unemployed</th>
+								</tr>
+								<tr>
+									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
+									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
+								</tr>
+								<tr>
+									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
+									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
+								</tr>
+								<tr>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+								</tr>
+							</table>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<div style="font-size: 15pt;">
+							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+							<pre data-id ="res">
+								<code data-trim data-line-numbers class="language-julia">
+									[["PWCMPWGT","PEMLR"],
+									["1927.2176","1"],
+									["4091.1605","1"],
+									["3871.5343","1"],
+									["4394.7075","1"],
+									["4612.7695","1"],
+									["4100.0707","1"],
+									...
+									["458.5755","1"],
+									["434.6154","2"],
+									["717.1432","4"],
+									["1985.7364","1"],
+									["2512.0695","1"],
+									["6458.2450","1"],
+									["5232.0439","1"],
+									["4396.5636","1"]]
+								</code>
+							</pre>
+							<table data-id="tbl" style="color:rgb(100, 187, 57)">
+								<tr>
+									<th>Labor Force</th>
+									<th>Unemployed</th>
+								</tr>
+								<tr>
+									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
+									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
+								</tr>
+								<tr>
+									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
+									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
+								</tr>
+								<tr>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+									<td>$wgt_{i}$ = PWCMPWGT</td>
+								</tr>
+							</table>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<span style="vertical-align:middle">(</span>
+						<em style="vertical-align:middle">with</em>
+						<img style="vertical-align:middle"src="https://raw.githubusercontent.com/mthelm85/dol-api-with-julia/main/julia-logo-color.svg" alt="Julia" width="125">
+						<span style="vertical-align:middle">)</span>
+						<pre data-id="code">
+							<code data-trim data-line-numbers class="language-julia">
+								using DataFramesMeta
+								using HTTP
+								using JSON3
+							</code>
+						</pre>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<h3>Computing The Unemployment Rate</h3>
+						<span style="vertical-align:middle">(</span>
+						<em style="vertical-align:middle">with</em>
+						<img style="vertical-align:middle"src="https://raw.githubusercontent.com/mthelm85/dol-api-with-julia/main/julia-logo-color.svg" alt="Julia" width="125">
+						<span style="vertical-align:middle">)</span>
+						<pre data-id="code">
+							<code data-trim data-line-numbers="1 | 2 | 3" class="language-julia">
+								using DataFramesMeta
+								using HTTP
+								using JSON3
+							</code>
+						</pre>
+					</section>
+					<section data-auto-animate>
+						<h3>Computing The Unemployment Rate</h3>
+						<pre data-id="code">
+							<code data-trim data-line-numbers class="language-julia">
+								function unemployment_rate(year::Int64, month::String)
+									url = "https://api.census.gov/data/$year/cps/basic/$month"
+									
+									params = Dict(
+										"get" => "PWCMPWGT",
+										"key" => "0e4dc0941d95473e9ce88d697d682b1d7",
+										"PEMLR" => "1,2,3,4"
+									)
+
+									res = HTTP.get(
+										url,
+										["Content-Type" => "application/json"],
+										query=params
+									)
+
+									body = JSON3.read(String(res.body))
+
+									df = DataFrame(
+										[getindex.(body[2:end][:], i) for i in 1:2],
+										body[1][:],
+										copycols=false
+									)
+
+									df.PWCMPWGT = parse.(Float64, df.PWCMPWGT)
+									df.PEMLR = parse.(Int64, df.PEMLR)
+									sum(df.PWCMPWGT .* (3 .≤ df.PEMLR .≤ 4)) / sum(df.PWCMPWGT)
+								end
+							</code>
+						</pre>
+					</section>
+					<section data-auto-animate>
+						<h3>Computing The Unemployment Rate</h3>
+						<pre data-id="code">
+							<code data-trim data-line-numbers="2 | 4-8 | 10-14 | 16 | 18-22 | 24-25 | 26" class="language-julia">
+								function unemployment_rate(year::Int64, month::String)
+									url = "https://api.census.gov/data/$year/cps/basic/$month"
+									
+									params = Dict(
+										"get" => "PWCMPWGT",
+										"key" => "0e4dc0941d95473e9ce88d697d682b1d7",
+										"PEMLR" => "1,2,3,4"
+									)
+
+									res = HTTP.get(
+										url,
+										["Content-Type" => "application/json"],
+										query=params
+									)
+
+									body = JSON3.read(String(res.body))
+
+									df = DataFrame(
+										[getindex.(body[2:end][:], i) for i in 1:2],
+										body[1][:],
+										copycols=false
+									)
+
+									df.PWCMPWGT = parse.(Float64, df.PWCMPWGT)
+									df.PEMLR = parse.(Int64, df.PEMLR)
+									sum(df.PWCMPWGT .* (3 .≤ df.PEMLR .≤ 4)) / sum(df.PWCMPWGT)
+								end
+							</code>
+						</pre>
+					</section>
+					<section data-auto-animate>
+						<h3>Computing The Unemployment Rate</h3>
+						<pre data-id="code">
+							<code data-trim data-line-numbers class="language-julia">
+								unemployment_rate(2022, "jan") * 100
+								# Output:
+								4.42597305215624
+							</code>
+						</pre>
+					</section>
+					<section>
+						<img style="vertical-align:middle"src="https://raw.githubusercontent.com/fonsp/Pluto.jl/dd0ead4caa2d29a3a2cfa1196d31e3114782d363/frontend/img/logo_white_contour.svg" alt="Pluto" width="200">
+						<span style="vertical-align:middle">demo</span>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="reveal.js/plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+		</script>
+		
+	</body>
+	<style>
+		.attention {
+			border: 2px solid white;
+			border-radius: 4px;
+			padding: 4px;
+		}
+	</style>
+</html>

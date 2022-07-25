@@ -259,8 +259,8 @@
 				<section>
 					<section data-auto-animate data-auto-animate-unmatched="false">
 						<h3>Computing The Unemployment Rate</h3>
-						<div style="font-size: 15pt;">
-							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+						<div>
+							<span style="font-size: 15pt;" data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
 							<pre>
 								<code data-trim data-line-numbers class="language-julia">
 									[["PWCMPWGT","PEMLR"],
@@ -281,30 +281,12 @@
 									["4396.5636","1"]]
 								</code>
 							</pre>
-							<table>
-								<tr>
-									<th>Labor Force</th>
-									<th>Unemployed</th>
-								</tr>
-								<tr>
-									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
-									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
-								</tr>
-								<tr>
-									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
-									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
-								</tr>
-								<tr>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-								</tr>
-							</table>
 						</div>
 					</section>
 					<section data-auto-animate data-auto-animate-unmatched="false">
 						<h3>Computing The Unemployment Rate</h3>
-						<div style="font-size: 15pt;">
-							<span data-id ="url" style="color:rgb(100, 187, 57)">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+						<div>
+							<span style="font-size: 15pt; color:rgb(100, 187, 57)" data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
 							<pre data-id ="res">
 								<code data-trim data-line-numbers class="language-julia">
 									[["PWCMPWGT","PEMLR"],
@@ -325,30 +307,12 @@
 									["4396.5636","1"]]
 								</code>
 							</pre>
-							<table>
-								<tr>
-									<th>Labor Force</th>
-									<th>Unemployed</th>
-								</tr>
-								<tr>
-									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
-									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
-								</tr>
-								<tr>
-									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
-									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
-								</tr>
-								<tr>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-								</tr>
-							</table>
 						</div>
 					</section>
 					<section data-auto-animate data-auto-animate-unmatched="false">
 						<h3>Computing The Unemployment Rate</h3>
-						<div style="font-size: 15pt;">
-							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+						<div>
+							<span style="font-size: 15pt;" data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
 							<pre data-id ="res">
 								<code data-trim data-line-numbers="1 | 2-16" class="language-julia">
 									[["PWCMPWGT","PEMLR"],
@@ -369,69 +333,38 @@
 									["4396.5636","1"]]
 								</code>
 							</pre>
-							<table data-id="tbl">
-								<tr>
-									<th>Labor Force</th>
-									<th>Unemployed</th>
-								</tr>
-								<tr>
-									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
-									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
-								</tr>
-								<tr>
-									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
-									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
-								</tr>
-								<tr>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-								</tr>
-							</table>
 						</div>
 					</section>
-					<section data-auto-animate data-auto-animate-unmatched="false">
-						<h3>Computing The Unemployment Rate</h3>
-						<div style="font-size: 15pt;">
-							<span data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
-							<pre data-id ="res">
-								<code data-trim data-line-numbers class="language-julia">
-									[["PWCMPWGT","PEMLR"],
-									["1927.2176","1"],
-									["4091.1605","1"],
-									["3871.5343","1"],
-									["4394.7075","1"],
-									["4612.7695","1"],
-									["4100.0707","1"],
-									...
-									["458.5755","1"],
-									["434.6154","2"],
-									["717.1432","4"],
-									["1985.7364","1"],
-									["2512.0695","1"],
-									["6458.2450","1"],
-									["5232.0439","1"],
-									["4396.5636","1"]]
-								</code>
-							</pre>
-							<table data-id="tbl" style="color:rgb(100, 187, 57)">
-								<tr>
-									<th>Labor Force</th>
-									<th>Unemployed</th>
-								</tr>
-								<tr>
-									<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
-									<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
-								</tr>
-								<tr>
-									<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
-									<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
-								</tr>
-								<tr>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-									<td>$wgt_{i}$ = PWCMPWGT</td>
-								</tr>
-							</table>
-						</div>
+					<section data-auto-animate>
+						<span style="font-size: 15pt;" data-id ="url">https://api.census.gov/data/2022/cps/basic/may?get=PWCMPWGT&PEMLR=1,2,3,4&key=f0c0e4dc4...</span>
+						<pre data-id ="res">
+							<code data-trim data-line-numbers class="language-julia">
+								[["PWCMPWGT","PEMLR"],
+								["1927.2176","1"],
+								["434.6154","2"],
+								...
+								["717.1432","4"],
+								["4396.5636","3"]]
+							</code>
+						</pre>
+						<table data-id="tbl" style="color:rgb(100, 187, 57)">
+							<tr>
+								<th>Labor Force</th>
+								<th>Unemployed</th>
+							</tr>
+							<tr>
+								<td>$\sum_{i=1}^n wgt_{i} L_{i}$</td>
+								<td>$\sum_{i=1}^n wgt_{i} U_{i}$</td>
+							</tr>
+							<tr>
+								<td>$L_{i}$ = 1 ≤ PEMLR ≤ 4</td>
+								<td>$U_{i}$ = 3 ≤ PEMLR ≤ 4</td>
+							</tr>
+							<tr>
+								<td>$wgt_{i}$ = PWCMPWGT</td>
+								<td>$wgt_{i}$ = PWCMPWGT</td>
+							</tr>
+						</table>
 					</section>
 					<section data-auto-animate data-auto-animate-unmatched="false">
 						<h3>Computing The Unemployment Rate</h3>

@@ -34,6 +34,7 @@
 							<li>CPS Overview</li>
 							<li>Accessing CPS Microdata (via the API)</li>
 							<li>Computing Estimates</li>
+							<li>Reliability of Estimates</li>
 						</ul>
 					</section>
 					<section data-auto-animate>
@@ -42,6 +43,7 @@
 							<li style="color:rgb(100, 187, 57)">CPS Overview</li>
 							<li>Accessing CPS Microdata (via the API)</li>
 							<li>Computing Estimates</li>
+							<li>Reliability of Estimates</li>
 						</ul>
 					</section>
 					<section data-auto-animate>
@@ -50,6 +52,7 @@
 							<li>CPS Overview</li>
 							<li style="color:rgb(100, 187, 57)">Accessing CPS Microdata (via the API)</li>
 							<li>Computing Estimates</li>
+							<li>Reliability of Estimates</li>
 						</ul>
 					</section>
 					<section data-auto-animate>
@@ -58,6 +61,16 @@
 							<li>CPS Overview</li>
 							<li>Accessing CPS Microdata (via the API)</li>
 							<li style="color:rgb(100, 187, 57)">Computing Estimates</li>
+							<li>Reliability of Estimates</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3>Outline</h3>
+						<ul>
+							<li>CPS Overview</li>
+							<li>Accessing CPS Microdata (via the API)</li>
+							<li>Computing Estimates</li>
+							<li style="color:rgb(100, 187, 57)">Reliability of Estimates</li>
 						</ul>
 					</section>
 				</section>
@@ -461,12 +474,7 @@
 										"PEMLR" => "1,2,3,4"
 									)
 
-									res = HTTP.get(
-										url,
-										["Content-Type" => "application/json"],
-										query=params
-									)
-
+									res = HTTP.get(url,	query=params)
 									body = JSON3.read(String(res.body))
 
 									df = DataFrame(
@@ -485,7 +493,7 @@
 					<section data-auto-animate>
 						<h3>Computing The Unemployment Rate</h3>
 						<pre data-id="code">
-							<code data-trim data-line-numbers="2 | 4-8 | 10-14 | 16 | 18-22 | 24-25 | 26" class="language-julia">
+							<code data-trim data-line-numbers="2 | 4-8 | 10 | 11 | 13-17 | 19-20 | 21" class="language-julia">
 								function unemployment_rate(year::Int64, month::String)
 									url = "https://api.census.gov/data/$year/cps/basic/$month"
 									
@@ -495,12 +503,7 @@
 										"PEMLR" => "1,2,3,4"
 									)
 
-									res = HTTP.get(
-										url,
-										["Content-Type" => "application/json"],
-										query=params
-									)
-
+									res = HTTP.get(url,	query=params)
 									body = JSON3.read(String(res.body))
 
 									df = DataFrame(
